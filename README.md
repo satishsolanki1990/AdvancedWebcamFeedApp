@@ -79,4 +79,4 @@ streamlit run main.py
 
 ## Contact
 
-Your Name - satishsolanki1990@gmail.com
+Email: satishsolanki1990@gmail.com
