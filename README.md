@@ -2,26 +2,40 @@
 
 ## Overview
 
-This Streamlit-based application provides a real-time, multi-view webcam feed with advanced image processing and visualization capabilities. The application offers simultaneous display of BGR, grayscale, and color channel feeds with interactive controls.
+This Streamlit app provides real-time webcam visualization with multi-processing features. It offers a solution for monitoring webcam streams with interactive controls and robust processing.
 
 ## Features
 
-### 🎥 Real-Time Video Processing
-- Capture live webcam feed
-- Simultaneous display of multiple image representations
-- Adaptive frame caching for continuous viewing
+### 🎥 Video Capture
+- Real-time webcam feed capture
+- Automatic detection of:
+  - Frames per second (FPS)
+  - Video source
+  - Frame dimensions
 
-### 🖥️ Interactive Controls
-- Grayscale intensity adjustment
-- Color channel selection (Blue/Green/Red)
-- Dynamic frame resizing
-- Sidebar information display
+### 🖥️ Multi-Channel Display
+Simultaneous display of:
+- Original BGR Image
+- Grayscale Image
+- Selected Color Channel (Blue/Green/Red)
 
-### 🔧 Technical Highlights
-- Multithreaded video capture [**Work in progress**]
-- Thread-safe frame caching
-- Error handling for webcam connectivity
-- Flexible UI layout
+### 🛠️ Interactive UI Controls
+- Frame Dimension Modification
+  - Width slider (320-1920 pixels)
+  - Height slider (240-1080 pixels)
+- Grayscale Intensity Slider
+- Color Channel Selection
+
+### 💾 Video Caching
+- 30-second video stream cache
+- Automatic fallback to cached frames if live feed is interrupted
+- Cache status indicators in UI
+
+### 🧵 Multi-Threading
+- Parallel processing of:
+  - Video capture
+  - Frame processing
+  - UI rendering
 
 ## Prerequisites
 
@@ -30,10 +44,9 @@ This Streamlit-based application provides a real-time, multi-view webcam feed wi
 - Webcam-enabled device
 
 ### Dependencies
-- OpenCV (`opencv-python`)
-- NumPy
+- OpenCV (`cv2`)
 - Streamlit
-- Threading module
+- Threading
 
 ## Installation
 
@@ -43,15 +56,15 @@ git clone git@github.com:satishsolanki1990/AdvancedWebcamFeedApp.git
 cd AdvancedWebcamFeedApp
 ```
 
-2. Create a virtual environment (optional but recommended):
+2. Create a virtual environment:
 ```bash
-python -m venv venv
+python -m venv env
 source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 ```
 
 3. Install required packages:
 ```bash
-pip install streamlit opencv-python 
+pip install -r requirements.txt
 ```
 
 ## Running the Application
@@ -59,23 +72,6 @@ pip install streamlit opencv-python
 ```bash
 streamlit run main.py
 ```
-
-## Usage Guide
-
-### Sidebar Controls
-- **Grayscale Intensity**: Adjust the brightness/contrast of the grayscale feed
-- **Channel Selection**: Choose between Blue, Green, and Red color channels
-- **Frame Scale Factor**: Resize the video frames dynamically
-
-### Display Sections
-1. **Main BGR Feed**: Full-color webcam view
-2. **Grayscale Feed**: Monochrome representation
-3. **Channel Feed**: Selected color channel visualization
-
-## Performance Considerations
-- Application uses multithreading for smooth performance [**Work in progress**]
-- Frame caching supports up to 30 seconds of video
-- Adjustable frame rate and scale factor
 
 ## Contact
 
