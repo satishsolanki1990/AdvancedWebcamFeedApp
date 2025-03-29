@@ -4,7 +4,7 @@
 
 This Streamlit app provides real-time webcam visualization with multi-processing features. It offers a solution for monitoring webcam streams with interactive controls and robust processing.
 
-<img src="images/screenshot.png" alt="Application Screenshot" width="500" height="400">
+<img src="images/screenshot.png" alt="Application Screenshot" width="800" height="400">
 
 ## Features
 
