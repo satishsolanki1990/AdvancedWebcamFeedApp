@@ -27,6 +27,7 @@ Simultaneous display of:
   - Height slider (240-1080 pixels)
 - Grayscale Intensity Slider
 - Color Channel Selection
+- Checkbox for Mirror mode
 
 ### 💾 Video Caching
 - 30-second video stream cache
