@@ -60,8 +60,8 @@ cd AdvancedWebcamFeedApp
 
 2. Create a virtual environment:
 ```bash
-python -m venv env
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+python3 -m venv env
+source env/bin/activate  # On Windows, use `venv\Scripts\activate`
 ```
 
 3. Install required packages:
