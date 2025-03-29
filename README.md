@@ -42,7 +42,8 @@ Simultaneous display of:
 ## Prerequisites
 
 ### System Requirements
-- Python 3.8+
+The app is developed in the Apple Macbook Air(M2).
+- Python 3.11+
 - Webcam-enabled device
 
 ### Dependencies
@@ -54,14 +55,14 @@ Simultaneous display of:
 
 1. Clone the repository:
 ```bash
-git clone git@github.com:satishsolanki1990/AdvancedWebcamFeedApp.git
+git clone https://github.com/satishsolanki1990/AdvancedWebcamFeedApp
 cd AdvancedWebcamFeedApp
 ```
 
 2. Create a virtual environment:
 ```bash
-python3 -m venv env
-source env/bin/activate  # On Windows, use `venv\Scripts\activate`
+python3.11 -m venv env
+source env/bin/activate  # On Windows, use `env\Scripts\activate`
 ```
 
 3. Install required packages:
