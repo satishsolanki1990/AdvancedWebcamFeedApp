@@ -17,6 +17,10 @@ class StreamlitUI_manager:
         self.user_width = st.sidebar.slider("Frame width", 320, 1920, 640)
         self.user_height = st.sidebar.slider("Frame height", 240, 1080, 480)
 
+        # Add mirror option
+        self.mirror_mode = st.sidebar.checkbox("Mirror Mode", value=True)
+
+
         self.col1, self.col2, self.col3 = st.columns([1,1,1])
         self.channel_map = {"Blue": 0, "Green": 1, "Red": 2}
 
@@ -38,10 +42,17 @@ class StreamlitUI_manager:
 
     def display_feed(self, frames, live_or_cache):
         if frames:
-            self.frame_placeholder.image(frames['raw'], channels="BGR", caption=f"BGR {live_or_cache} Feed", use_container_width=True)
+            frame = frames['raw']
             grayframe = cv2.convertScaleAbs(frames['gray'], alpha=1, beta=self.gray_slider)
+
+             # Apply mirror effect if enabled
+            if self.mirror_mode:
+                frame = cv2.flip(frame, 1)  # 1 = horizontal flip
+                grayframe = cv2.flip(grayframe, 1) 
+                
+            self.frame_placeholder.image(frame, channels="BGR", caption=f"BGR {live_or_cache} Feed", use_container_width=True)
             self.gray_placeholder.image(grayframe, channels="Gray", caption=f"Gray {live_or_cache} Feed", use_container_width=True)
-            self.bgr_placeholder.image(frames['raw'][:, :, self.channel_map[self.channel]], channels="Gray", caption=f"{live_or_cache} {self.channel} Feed", use_container_width=True)
+            self.bgr_placeholder.image(frame[:, :, self.channel_map[self.channel]], channels="Gray", caption=f"{live_or_cache} {self.channel} Feed", use_container_width=True)
         else:
             self.error_placeholder.write("No frames available")
 
