@@ -12,7 +12,7 @@ class StreamlitUI_manager:
         self.info_placeholder = st.empty()
         self.error_placeholder = st.empty()
 
-        self.gray_slider = st.sidebar.slider("Grayscale Intensity", 0, 255, 128) # gray intensity
+        self.gray_slider = st.sidebar.slider("Grayscale Intensity", 0, 255, 64) # gray intensity
         self.channel = st.sidebar.selectbox("Select Channel", ["Blue", "Green", "Red"], index=0) # select channel
         self.user_width = st.sidebar.slider("Frame width", 320, 1920, 640)
         self.user_height = st.sidebar.slider("Frame height", 240, 1080, 480)
@@ -56,6 +56,18 @@ class StreamlitUI_manager:
         else:
             self.error_placeholder.write("No frames available")
 
+class ProcessFrames:
+    def __init__(self):
+        pass
+
+    def resize(self, frame, width=640, height=480):
+        # Resize
+        return cv2.resize(frame, (width, height))
+
+    def convertToGray(self, frame, intensity=64):
+        grayframe = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        return cv2.convertScaleAbs(grayframe, alpha=1, beta=intensity)
+
 class WebcamFeedApp:
     def __init__(self):
         # UI
@@ -70,6 +82,9 @@ class WebcamFeedApp:
         # Camera parameters
         self.fps = 30
         self.camera_error = False
+
+        # Frame Processing object 
+        self.processFrames = ProcessFrames()  
 
     def capture_video(self):
         """ Frame capture and processing """
@@ -94,11 +109,10 @@ class WebcamFeedApp:
                     self.message_queue.put({"error": "Lost webcam connection"})
                     self.camera_error = True
                     break
-                
-                # Resize and convert frame
-                resized_frame = cv2.resize(frame, (self.ui_manager.user_width, self.ui_manager.user_height))
-                gray_frame = cv2.cvtColor(resized_frame, cv2.COLOR_BGR2GRAY)
 
+                # process the frame
+                resized_frame = self.processFrames.resize(frame, self.ui_manager.user_width, self.ui_manager.user_height)
+                gray_frame = self.processFrames.convertToGray(resized_frame, self.ui_manager.gray_slider)
                 frame_data = {
                     'raw': resized_frame,
                     'gray': gray_frame,
